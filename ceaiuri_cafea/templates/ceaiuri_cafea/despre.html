@@ -1,0 +1,15 @@
+{% extends "ceaiuri_cafea/baza.html" %}
+{% load static %}
+{% block titlu %}Despre noi{% endblock %}
+{% block continut %}
+<h1>Despre noi</h1>
+<img src="{% static 'imagini/cafea.jpg' %}" alt="Cafea">
+<section id="povestea-noastra">
+    <h2>Povestea noastră</h2>
+    <p>Am pornit ca o mică prăjitorie de cafea și am ajuns un magazin online.</p>
+</section>
+<section id="echipa">
+    <h2>Echipa</h2>
+    <p>Suntem o echipă de pasionați de ceai și cafea.</p>
+</section>
+{% endblock %}

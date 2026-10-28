@@ -1,0 +1,26 @@
+{% extends "ceaiuri_cafea/baza.html" %}
+{% load static %}
+{% block titlu %}Coffee Breaks Online{% endblock %}
+{% block continut %}
+<section id="bun-venit">
+    <h1>Coffee Breaks Online</h1>
+    <p>Magazin online de ceaiuri și cafea: ceaiuri din frunze, cafea boabe și măcinată, accesorii de preparare.</p>
+    <img src="{% static 'imagini/ceai.jpg' %}" alt="Ceai">
+</section>
+<section id="recomandari">
+    <h2>Recomandări</h2>
+    <p>Amestecurile noastre preferate de sezon.</p>
+</section>
+<section id="orar">
+    <h2>Orar</h2>
+    <p>Luni-Sâmbătă 09:00-20:00, Duminica închis.</p>
+</section>
+<section id="promotii">
+    <h2>Promoții</h2>
+    <p>-15% la cafeaua boabe la comenzi peste 100 lei.</p>
+</section>
+<section id="noutati">
+    <h2>Noutăți</h2>
+    <p>Am adăugat ceaiuri verzi din Japonia.</p>
+</section>
+{% endblock %}

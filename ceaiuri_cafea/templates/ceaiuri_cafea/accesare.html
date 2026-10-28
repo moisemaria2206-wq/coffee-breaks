@@ -1,0 +1,28 @@
+{% extends "ceaiuri_cafea/baza.html" %}
+{% block titlu %}Accesarea {{ acc.id }}{% endblock %}
+{% block continut %}
+<h1>Accesarea {{ acc.id }}</h1>
+<section>
+    <h2>Informații</h2>
+    <ul>
+        <li>id: {{ acc.id }}</li>
+        <li>ip_client: {{ acc.ip_client }}</li>
+        <li>url: {{ acc.url }}</li>
+        <li>pagina: {{ acc.pagina }}</li>
+        <li>data: {{ acc.data }}</li>
+    </ul>
+</section>
+<section>
+    <h2>Parametri</h2>
+    {% if acc.parametri %}
+    <ul>
+        {% for nume, val in acc.lista_parametri %}
+        <li>{{ nume }}: {{ val|default_if_none:"(fără valoare)" }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Această accesare nu a avut parametri.</p>
+    {% endif %}
+</section>
+<p><a href="{% url 'log' %}">Înapoi la log</a></p>
+{% endblock %}

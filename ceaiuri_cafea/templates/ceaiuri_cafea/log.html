@@ -1,0 +1,52 @@
+{% extends "ceaiuri_cafea/baza.html" %}
+{% block titlu %}Log accesări{% endblock %}
+{% block continut %}
+<h1>Log accesări</h1>
+
+{% if nr_total is not None %}
+<section>
+    <h2>Număr accesări</h2>
+    <p>De la pornirea serverului: {{ nr_total }} accesări.</p>
+</section>
+{% endif %}
+
+<section>
+    <h2>Parametri</h2>
+    <p>Număr parametri primiți: {{ parametri|length }}</p>
+    {% if parametri %}
+    <ul>{% for p in parametri %}<li>{{ p }}</li>{% endfor %}</ul>
+    {% endif %}
+</section>
+
+{% if detalii %}
+<section>
+    <h2>Detalii</h2>
+    <ul>{% for id, d in detalii %}<li>Accesarea {{ id }}: {{ d }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+<section>
+    <h2>Accesări</h2>
+    {% if coloane %}
+    <div class="scroll">
+    <table>
+        <tr>{% for c in coloane %}<th>{{ c }}</th>{% endfor %}</tr>
+        {% for rand in randuri %}
+        <tr>{% for v in rand %}<td>{{ v }}</td>{% endfor %}</tr>
+        {% endfor %}
+    </table>
+    </div>
+    {% else %}
+    <ul>
+        {% for a in selectate %}
+        <li><a href="{% url 'accesare' id=a.id %}">Accesarea {{ a.id }}</a>: {{ a.url }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</section>
+
+{% for e in erori %}<p class="eroare">{{ e }}</p>{% endfor %}
+
+<p>Cea mai puțin accesată pagină: <b>{{ mai_putin }}</b></p>
+<p>Cea mai accesată pagină: <b>{{ mai_mult }}</b></p>
+{% endblock %}
