@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#e8d5b7"/>
+  <rect x="10" y="10" width="380" height="280" fill="none" stroke="#6b4a35" stroke-width="3" stroke-dasharray="10 6"/>
+  <text x="200" y="145" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#4a2c1a" text-anchor="middle">imagine</text>
+  <text x="200" y="185" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#4a2c1a" text-anchor="middle">indisponibilă</text>
+</svg>

@@ -3,7 +3,7 @@
     {% if p.imagine %}
         <img src="{{ p.imagine.url }}" alt="{{ p.nume }}">
     {% else %}
-        <img src="{% static 'imagini/indisponibil.png' %}" alt="imagine indisponibilă">
+        <img src="{% static 'imagini/indisponibil.svg' %}" alt="imagine indisponibilă">
     {% endif %}
     <h3><a href="{{ p.get_absolute_url }}">{{ p.nume }}</a></h3>
     <div>

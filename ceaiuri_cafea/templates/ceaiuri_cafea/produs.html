@@ -17,7 +17,7 @@
     {% if produs.imagine %}
         <img class="mare" src="{{ produs.imagine.url }}" alt="{{ produs.nume }}">
     {% else %}
-        <img class="mare" src="{% static 'imagini/indisponibil.png' %}" alt="imagine indisponibilă">
+        <img class="mare" src="{% static 'imagini/indisponibil.svg' %}" alt="imagine indisponibilă">
     {% endif %}
     <p>Categorie: <a href="{{ produs.categorie.get_absolute_url }}">{% include "ceaiuri_cafea/_sigla.html" with cat=produs.categorie %} {{ produs.categorie.nume }}</a></p>
     <p>Tip: {{ produs.get_tip_produs_display }}</p>
@@ -36,7 +36,7 @@
 <div class="sim-grid">
     {% for s in similare %}
     <a class="sim" href="{{ s.get_absolute_url }}">
-        {% if s.imagine %}<img src="{{ s.imagine.url }}" alt="{{ s.nume }}">{% else %}<img src="{% static 'imagini/indisponibil.png' %}" alt="imagine indisponibilă">{% endif %}
+        {% if s.imagine %}<img src="{{ s.imagine.url }}" alt="{{ s.nume }}">{% else %}<img src="{% static 'imagini/indisponibil.svg' %}" alt="imagine indisponibilă">{% endif %}
         <div>{{ s.nume }}</div>
         <div><b>{{ s.pret_100g }} lei</b></div>
     </a>
