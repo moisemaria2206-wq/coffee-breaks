@@ -129,3 +129,7 @@ SECRET_KEY = os.environ.get(
     "SECRET_KEY",
     "ceai_si_cafea_1234567890",
 )
+
+STOC_MIN = 10        # sub această valoare, produsul are stoc limitat
+PROD_PER_PAG = 5     # câte produse apar pe o pagină
+

@@ -1,0 +1,92 @@
+/* Paleta cafea, aplicată în toate temele (deschisă, închisă, automată) */
+html,
+html[data-theme="light"],
+html[data-theme="dark"],
+html:not([data-theme]) {
+    --body-bg: #2b1d14;              /* fundalul paginii */
+    --body-fg: #f1e6d8;
+    --body-quiet-color: #cdbfae;
+    --darkened-bg: #3a281b;
+    --border-color: #5a4130;
+    --hairline-color: #4a3526;
+    --primary: #6f4e37;
+    --secondary: #8b5a2b;
+    --header-bg: #3b2a20;
+    --header-color: #f1e6d8;
+    --selected-row: #8b5a2b;         /* rândul selectat */
+    --breadcrumbs-bg: #4a3322;       /* bara breadcrumbs */
+    --breadcrumbs-fg: #f1e6d8;
+    --breadcrumbs-link-fg: #e0b987;
+    --link-fg: #e0b987;
+    --link-hover-color: #ffd89b;
+}
+
+body {
+    background: #2b1d14;
+    color: #f1e6d8;
+}
+
+/* fundalul meniului lateral */
+#nav-sidebar {
+    background: #4a3322;
+    border-right: 1px solid #5a4130;
+}
+
+#nav-sidebar .module a,
+#nav-sidebar .module caption {
+    color: #f1e6d8;
+}
+
+/* rândul selectat din liste */
+tr.selected td,
+tr.selected th {
+    background-color: #8b5a2b !important;
+}
+
+/* bara breadcrumbs */
+div.breadcrumbs {
+    background: #4a3322;
+    color: #f1e6d8;
+}
+
+div.breadcrumbs a {
+    color: #e0b987;
+}
+
+/* sigla din antet */
+.sigla-admin {
+    height: 36px;
+    width: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+#branding-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* linkurile din paginare */
+.paginator a:link,
+.paginator a:visited {
+    background: #6f4e37;
+    color: #f1e6d8;
+    border: 1px solid #8b5a2b;
+    border-radius: 4px;
+    padding: 4px 10px;
+    text-decoration: none;
+}
+
+.paginator a:hover {
+    background: #8b5a2b;
+    color: #ffffff;
+}
+
+.paginator .this-page {
+    background: #e0b987;
+    color: #2b1d14;
+    border-radius: 4px;
+    padding: 4px 10px;
+}
