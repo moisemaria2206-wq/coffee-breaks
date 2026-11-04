@@ -1,9 +1,10 @@
 from django.db import models
-from django.db.models import F, Q
+from django.db.models import F, Q, CharField
+from django.db.models.functions import Length
 from django.contrib.postgres.fields import ArrayField
-from django.db import models
-from django.db.models import F, Q
 from django.utils import timezone
+
+CharField.register_lookup(Length)
 
 class Categorie(models.Model):
     nume = models.CharField(
@@ -167,6 +168,16 @@ class Produs(models.Model):
         blank=True,
         help_text="Aromele produsului, separate prin virgulă (ex: vanilie, caramel, scorțișoară).",
     )
+    stoc = models.PositiveIntegerField(
+        default=0,
+        help_text="Numărul de bucăți disponibile. Sub STOC_MIN, produsul apare cu stoc limitat în site.",
+    )
+    taguri = ArrayField(
+        models.CharField(max_length=30),
+        default=list,
+        blank=True,
+        help_text="Cuvinte cheie pentru filtrare, separate prin virgulă (ex: bio, fara-cofeina, premium).",
+    )
     categorie = models.ForeignKey(
         Categorie, on_delete=models.PROTECT, related_name="produse"
     )
@@ -187,8 +198,30 @@ class Produs(models.Model):
             models.CheckConstraint(
                 condition=Q(pret_100g__gt=0),
                 name="produs_pret_pozitiv",
+                violation_error_message="Prețul trebuie să fie mai mare decât 0.",
+            ),
+            models.CheckConstraint(
+                condition=Q(nume__length__gte=3),
+                name="produs_nume_minim_3_caractere",
+                violation_error_message="Numele produsului trebuie să aibă cel puțin 3 caractere.",
+            ),
+            models.CheckConstraint(
+                condition=Q(tip_produs="accesoriu") | Q(pret_100g__lte=1000),
+                name="produs_pret_maxim_alimente",
+                violation_error_message="Ceaiul și cafeaua nu pot costa mai mult de 1000 lei / 100 g.",
+            ),
+            models.CheckConstraint(
+                condition=Q(pret_100g__lte=10000),
+                name="produs_pret_maxim",
+                violation_error_message="Prețul nu poate depăși 10000 lei.",
+            ),
+            models.CheckConstraint(
+                condition=Q(tip_produs__in=["ceai", "cafea", "accesoriu"]),
+                name="produs_tip_valid",
+                violation_error_message="Tipul produsului trebuie să fie ceai, cafea sau accesoriu.",
             ),
         ]
+
 
     def __str__(self):
         return self.nume
