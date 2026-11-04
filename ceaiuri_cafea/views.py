@@ -3,6 +3,11 @@ from urllib.parse import urlparse
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from collections import Counter
+from .models import Produs
+from django.conf import settings
+from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404, render
+from .models import Categorie, Produs
 
 ZILE = ["Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă", "Duminică"]
 LUNI = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
@@ -84,7 +89,8 @@ def info(request):
 
 def produse(request):
     creeaza_accesare(request)
-    return render(request, "ceaiuri_cafea/in_lucru.html")
+    lista = Produs.objects.select_related("categorie", "brand")
+    return render(request, "ceaiuri_cafea/produse.html", {"produse": lista})
 
 
 def contact(request):
