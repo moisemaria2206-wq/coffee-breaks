@@ -1,1 +1,1 @@
-{% load static %}{% if cat.sigla|slice:":2" == "fa" %}<i class="{{ cat.sigla }}"></i>{% else %}<img src="{% static cat.sigla %}" alt="" style="height:24px;width:auto;vertical-align:middle;">{% endif %}
+{% load static %}{% if cat.sigla|slice:":2" == "fa" %}<i class="fa-solid {{ cat.sigla }}"></i>{% else %}<img src="{% static cat.sigla %}" alt="" style="height:24px;width:auto;vertical-align:middle;">{% endif %}
