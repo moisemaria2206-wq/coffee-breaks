@@ -45,6 +45,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'ceaiuri_cafea.context_processors.date_firma',
+                'ceaiuri_cafea.context_processors.categorii_meniu',
             ],
         },
     },
@@ -122,7 +123,7 @@ FIRMA = {
     "program": "Luni-Sâmbătă 09:00-20:00", # caracteristica 2 (pune-o în documentație)
 }
 
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 SECRET_KEY = os.environ.get(

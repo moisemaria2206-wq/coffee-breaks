@@ -1,0 +1,48 @@
+{% extends "ceaiuri_cafea/baza.html" %}
+{% load static %}
+{% block titlu %}{{ produs.nume }}{% endblock %}
+{% block continut %}
+
+<style>
+    .detalii img.mare { max-width: 420px; border-radius: 10px; }
+    .sim-grid { display: flex; flex-wrap: wrap; gap: 16px; }
+    .sim { width: 180px; text-align: center; text-decoration: none; color: #4a2c1a; }
+    .sim img { width: 100%; height: 130px; object-fit: cover; border-radius: 8px; }
+    .tag { color: #6b4a35; margin-right: 6px; }
+    .stoc-limitat { color: #b00020; font-weight: bold; }
+</style>
+
+<div class="detalii" style="border-left: 6px solid {{ produs.categorie.culoare }}; padding-left: 14px;">
+    <h1>{{ produs.nume }}</h1>
+    {% if produs.imagine %}
+        <img class="mare" src="{{ produs.imagine.url }}" alt="{{ produs.nume }}">
+    {% else %}
+        <img class="mare" src="{% static 'imagini/indisponibil.png' %}" alt="imagine indisponibilă">
+    {% endif %}
+    <p>Categorie: <a href="{{ produs.categorie.get_absolute_url }}">{% include "ceaiuri_cafea/_sigla.html" with cat=produs.categorie %} {{ produs.categorie.nume }}</a></p>
+    <p>Tip: {{ produs.get_tip_produs_display }}</p>
+    <p>Brand: {{ produs.brand.nume|default:"-" }}</p>
+    <p>{{ produs.descriere|default:"" }}</p>
+    <p><b>{{ produs.pret_100g }} lei</b>{% if produs.tip_produs != "accesoriu" %} / 100 g{% endif %}</p>
+    <p>Stoc: {{ produs.stoc }} {% if produs.stoc_limitat %}<span class="stoc-limitat">(stoc limitat)</span>{% endif %}</p>
+    {% if produs.arome %}<p>Arome: {{ produs.arome|join:", " }}</p>{% endif %}
+    <p>Taguri:
+        {% for t in produs.taguri %}<a class="tag" href="{% url 'produse' %}?tag={{ t|urlencode }}">#{{ t }}</a>{% endfor %}
+    </p>
+    <p>Disponibil: {{ produs.disponibil|yesno:"da,nu" }}</p>
+</div>
+
+<h2>Produse din aceeași categorie</h2>
+<div class="sim-grid">
+    {% for s in similare %}
+    <a class="sim" href="{{ s.get_absolute_url }}">
+        {% if s.imagine %}<img src="{{ s.imagine.url }}" alt="{{ s.nume }}">{% else %}<img src="{% static 'imagini/indisponibil.png' %}" alt="imagine indisponibilă">{% endif %}
+        <div>{{ s.nume }}</div>
+        <div><b>{{ s.pret_100g }} lei</b></div>
+    </a>
+    {% empty %}
+    <p>Nu există alte produse în această categorie.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

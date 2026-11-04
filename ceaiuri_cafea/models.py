@@ -3,10 +3,13 @@ from django.db.models import F, Q, CharField
 from django.db.models.functions import Length
 from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
+from django.conf import settings
+from django.urls import reverse
 
 CharField.register_lookup(Length)
 
 class Categorie(models.Model):
+    
     nume = models.CharField(
         max_length=50,
         unique=True,
@@ -43,6 +46,8 @@ class Categorie(models.Model):
 
     def __str__(self):
         return self.nume
+    def get_absolute_url(self):
+        return reverse("categorie", args=[self.nume])
 
 
 class Brand(models.Model):
@@ -138,6 +143,10 @@ class Eveniment(models.Model):
     
 
 class Produs(models.Model):
+
+    @property
+    def stoc_limitat(self):
+        return self.stoc < settings.STOC_MIN
     TIPURI = [
         ("ceai", "Ceai"),
         ("cafea", "Cafea"),
@@ -225,6 +234,13 @@ class Produs(models.Model):
 
     def __str__(self):
         return self.nume
+    
+    def get_absolute_url(self):
+        return reverse("produs", args=[self.pk])
+
+    @property
+    def stoc_limitat(self):
+        return self.stoc < settings.STOC_MIN
 
 
 class Varianta(models.Model):

@@ -1,0 +1,5 @@
+<div class="pag">
+    {% if pagina.has_previous %}<a href="?{% if qs %}{{ qs }}&{% endif %}page={{ pagina.previous_page_number }}">« anterioara</a>{% endif %}
+    pagina {{ pagina.number }} din {{ pagina.paginator.num_pages }}
+    {% if pagina.has_next %}<a href="?{% if qs %}{{ qs }}&{% endif %}page={{ pagina.next_page_number }}">următoarea »</a>{% endif %}
+</div>

@@ -87,11 +87,72 @@ def info(request):
     tip = request.GET.get("data", "")
     return render(request, "ceaiuri_cafea/info.html", {"data": acc.data(tip=tip)})
 
-def produse(request):
-    creeaza_accesare(request)
-    lista = Produs.objects.select_related("categorie", "brand")
-    return render(request, "ceaiuri_cafea/produse.html", {"produse": lista})
+COLOANE_SORTARE = {"nume", "pret_100g", "stoc", "data_adaugare"}
+K_SIMILARE = 4
 
+
+def lista_produse(request, categorie=None):
+    creeaza_accesare(request)
+    qs = Produs.objects.select_related("categorie", "brand")
+    if categorie:
+        qs = qs.filter(categorie=categorie)
+
+    # filtrare după taguri active (toate trebuie să fie prezente)
+    taguri = list(dict.fromkeys(t for t in request.GET.getlist("tag") if t))
+    if taguri:
+        qs = qs.filter(taguri__contains=taguri)
+
+    # sortare: ?sort=a|d & col=nume|pret_100g|stoc|data_adaugare
+    sort = request.GET.get("sort", "a")
+    col = request.GET.get("col", "nume")
+    if sort not in ("a", "d"):
+        sort = "a"
+    if col not in COLOANE_SORTARE:
+        col = "nume"
+    qs = qs.order_by(col if sort == "a" else "-" + col, "pk")
+
+    # paginare pe produsele deja sortate/filtrate
+    paginator = Paginator(qs, settings.PROD_PER_PAG)
+    pagina = paginator.get_page(request.GET.get("page"))
+
+    # querystring fără "page", refolosit în toate linkurile
+    params = request.GET.copy()
+    params.pop("page", None)
+
+    # butonașe pentru taguri active: (tag, querystring fără el)
+    taguri_active = []
+    for t in taguri:
+        p = params.copy()
+        p.setlist("tag", [x for x in taguri if x != t])
+        taguri_active.append((t, p.urlencode()))
+
+    return render(request, "ceaiuri_cafea/produse.html", {
+        "pagina": pagina,
+        "total": paginator.count,
+        "categorie": categorie,
+        "qs": params.urlencode(),
+        "taguri_active": taguri_active,
+        "sort": sort,
+        "col": col,
+        "coloane": sorted(COLOANE_SORTARE),
+    })
+
+
+def produse(request):
+    return lista_produse(request)
+
+
+def categorie(request, nume):
+    cat = get_object_or_404(Categorie, nume=nume)
+    return lista_produse(request, cat)
+
+
+def produs(request, id):
+    creeaza_accesare(request)
+    p = get_object_or_404(Produs.objects.select_related("categorie", "brand"), pk=id)
+    similare = (Produs.objects.filter(categorie=p.categorie)
+                .exclude(pk=p.pk).order_by("?")[:K_SIMILARE])
+    return render(request, "ceaiuri_cafea/produs.html", {"produs": p, "similare": similare})
 
 def contact(request):
     creeaza_accesare(request)
