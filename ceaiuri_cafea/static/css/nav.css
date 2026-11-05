@@ -4,7 +4,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     color: #3b2a20;
-    background: #f6efe6 url("../imagini/fundal.jpg") center / cover fixed;
+    background: #f6efe6 url("../imagini/coffeebean.jpg") repeat;
 }
 
 .meniu {

@@ -2,14 +2,20 @@
 {% load static %}
 {% block titlu %}Despre noi{% endblock %}
 {% block continut %}
-<h1>Despre noi</h1>
-<img src="{% static 'imagini/cafea.jpg' %}" alt="Cafea">
-<section id="povestea-noastra">
-    <h2>Povestea noastră</h2>
-    <p>Am pornit ca o mică prăjitorie de cafea și am ajuns un magazin online.</p>
-</section>
-<section id="echipa">
-    <h2>Echipa</h2>
-    <p>Suntem o echipă de pasionați de ceai și cafea.</p>
-</section>
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px;">
+    <div style="flex:1 1 300px;">
+        <h1>Despre noi</h1>
+        <section id="povestea-noastra">
+            <h2>Povestea noastră</h2>
+            <p>Coffee Breaks a pornit în 2019, dintr-o mică prăjitorie de cafea și dintr-o pasiune simplă: o pauză bună începe cu o ceașcă bună. Ce a început ca un colț de cartier cu câteva sortimente a ajuns astăzi un magazin online, cu ceaiuri, cafea și accesorii livrate în toată țara.</p>
+        </section>
+        <section id="echipa">
+            <h2>Echipa</h2>
+            <p>În spatele magazinului stă o echipă mică de iubitori de ceai și cafea: prăjitori, degustători și oameni care răspund cu drag la orice întrebare. Alegem fiecare produs la fel cum am vrea să-l găsim pe raftul nostru, de la boabe la ambalaj.</p>
+        </section>
+    </div>
+    <img src="{% static 'imagini/boabecafea.jpg' %}" alt="Boabe de cafea" style="flex:0 1 350px; max-width:350px; border-radius:10px;">
+</div>
+
 {% endblock %}

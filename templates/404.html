@@ -1,0 +1,13 @@
+{% extends "ceaiuri_cafea/baza.html" %}
+{% block titlu %}Pagina nu a fost găsită{% endblock %}
+{% block continut %}
+<div style="text-align:center; padding:30px 10px;">
+    <h1 style="font-size:64px; margin:0; color:#8b4513;">404</h1>
+    <h2>Ups, pagina căutată nu există</h2>
+    <p>Produsul sau pagina pe care o cauți nu a fost găsită. Poate a fost mutată sau adresa a fost scrisă greșit.</p>
+    <p>
+        <a href="{% url 'produse' %}" style="display:inline-block; padding:10px 20px; background:#6b4a35; color:#fff; border-radius:8px; text-decoration:none;">Vezi toate produsele</a>
+        <a href="{% url 'index' %}" style="display:inline-block; padding:10px 20px; background:#e8d5b7; color:#4a2c1a; border-radius:8px; text-decoration:none;">Înapoi acasă</a>
+    </p>
+</div>
+{% endblock %}

@@ -2,25 +2,46 @@
 {% load static %}
 {% block titlu %}Coffee Breaks Online{% endblock %}
 {% block continut %}
-<section id="bun-venit">
-    <h1>Coffee Breaks Online</h1>
-    <p>Magazin online de ceaiuri și cafea: ceaiuri din frunze, cafea boabe și măcinată, accesorii de preparare.</p>
-    <img src="{% static 'imagini/coffeecup.jpg' %}" alt="Coffeecup" style="max-width:380px; display:block; margin:0 auto;">
+<section id="bun-venit" style="display:flex; flex-wrap:wrap; align-items:center; gap:24px;">
+    <div style="flex:1 1 300px;">
+        <h1>Coffee Breaks Online</h1>
+        <p>Bun venit la Coffee Breaks, magazinul unde fiecare pauză devine un mic ritual. Găsești ceaiuri verzi, negre și de fructe, cafea boabe, măcinată sau la capsule și accesoriile potrivite pentru o ceașcă perfectă acasă.</p>
+        <p>Selectăm amestecuri atent alese, de la producători de încredere, ca să te bucuri de gust și aromă la fiecare înghițitură.</p>
+    </div>
+    <img src="{% static 'imagini/coffeecup.jpg' %}" alt="Ceașcă de cafea cu latte art" style="flex:0 1 350px; max-width:350px; border-radius:10px;">
 </section>
 <section id="recomandari">
     <h2>Recomandări</h2>
-    <p>Amestecurile noastre preferate de sezon.</p>
+    <p>Alegerile noastre de sezon, pentru orice moment al zilei:</p>
+    <ul>
+        <li><b>Brazilia Santos</b>, cafea boabe cu note de cacao, ideală pentru espresso</li>
+        <li><b>Ceai verde cu iasomie</b>, ușor și aromat, perfect pentru după-amiază</li>
+        <li><b>Capsule Intenso</b>, o cafea intensă, gata în câteva secunde</li>
+    </ul>
 </section>
+
 <section id="orar">
     <h2>Orar</h2>
-    <p>Luni-Sâmbătă 09:00-20:00, Duminica închis.</p>
+    <p>Comenzile se procesează în timpul programului nostru:</p>
+    <ul>
+        <li>Luni - Vineri: 09:00 - 20:00</li>
+        <li>Sâmbătă: 09:00 - 18:00</li>
+        <li>Duminică: închis</li>
+    </ul>
+    <p>Poți plasa comenzi online oricând, iar noi le preluăm din prima zi lucrătoare.</p>
 </section>
+
 <section id="promotii">
     <h2>Promoții</h2>
-    <p>-15% la cafeaua boabe la comenzi peste 100 lei.</p>
+    <ul>
+        <li><b>-15%</b> la cafeaua boabe, la comenzi de peste 100 lei</li>
+        <li><b>Transport gratuit</b> pentru comenzile de peste 150 lei</li>
+        <li><b>1+1 gratis</b> la accesoriile de preparare, în weekend</li>
+    </ul>
 </section>
+
 <section id="noutati">
     <h2>Noutăți</h2>
-    <p>Am adăugat ceaiuri verzi din Japonia.</p>
+    <p>Am adăugat în catalog ceaiuri verzi din Japonia și două sortimente noi de cafea măcinată, de la producători parteneri. În curând apar și ceaiurile de fructe de iarnă, cu scorțișoară și portocală.</p>
 </section>
 {% endblock %}
